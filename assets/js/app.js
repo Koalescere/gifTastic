@@ -6,7 +6,7 @@
 
         $("#moto-container").empty();
 
-        for (var i=0; i < motoMachines.length; i++){
+        for (var i=0; i < motoMachines.length; i++) {
           var a = $("<button>");
           a.addClass("moto");
           a.attr("data-name", motoMachines[i]);
@@ -17,15 +17,25 @@
     //createButtons(); check that buttons are made
 
 
-    $("add-moto").on("click", function(event){
+    $("#add-moto").on("click", function(event){
         event.preventDefault();
-        var newmoto = $("moto-input").val().trim();
-        motoMachines.push(newmoto);
+        var moto = $("#newmoto").val().trim();
+        motoMachines.push(moto);
         createButtons();
     });
     createButtons();
-    console.log(event);
 
-
+    $("button").on("click", function() {
+        var motoDisplay = $this.attr("data");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + motoDisplay + "&api_key=QZ2LOfJhGjcBK66FkyDBULoGD4CFu8Wp&limit=5";
     
- 
+        $.ajax({
+            url:  queryURL,
+            method:  "GET"
+        })
+        .then(function(response){
+            console.log(queryURL);
+            console.log(response);
+        })
+    })    
+
