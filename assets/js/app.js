@@ -1,5 +1,5 @@
 //alert("we're linked");
-    var motoMachines = ["engine", "isle-of-man-racing", "superyachts", "astonmartin", "supercar", "rallydakar", "dunebuggy"];
+    var motoMachines = ["engine", "isle-of-man-racing", "superyachts", "astonmartin", "concept-motorcycles", "rallydakar", "driving-animals", "baja-racing"];
 
     // takes motomachines assignment, and convert into buttons
     function createButtons() {
@@ -43,7 +43,8 @@
             var motoDiv = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
             var motoImage = $("<img>");
-            motoImage.attr("src", results[i].imgages.fixed_height_still.url);
+            // motoImage.attr("src", results[i].images.original.url);
+            motoImage.attr("src", results[i].images.original_still.url);
             motoDiv.append(p);
             motoDiv.append(motoImage);
             $("#gifs-appear-here").prepend(motoDiv);
@@ -51,4 +52,14 @@
     });
     });
            
+    $(".gif").on("click", function() {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+      });
     
